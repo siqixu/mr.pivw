@@ -14,7 +14,7 @@ mr.pivw(data,lambda=1,plei=TRUE,sel.pval=NULL,delta=0,Boot.Fieller=TRUE,sig=0.05
 ```
 data: A matrix or data frame consists of four columns: the 1st (2nd) column contains the estimated genetic effects on the outcome (exposure); the 3rd (4th) column contains the estimated standard errors of the estimated genetic effects on the outcome (exposure).
 
-lambda: he penalty parameter in the pIVW estimator. The penalty parameter plays a role in the bias-variance trade-off of the estimator. We recommend to choose lambda to be 1 to achieve smallest bias and valid inference. By default, lambda=1.
+lambda: The penalty parameter in the pIVW estimator. The penalty parameter plays a role in the bias-variance trade-off of the estimator. We recommend to choose lambda to be 1 to achieve smallest bias and valid inference. By default, lambda=1.
 
 plei: If plei=TRUE, then the horizontal pleiotropy will be taken into account in the pIVW estimator. By default, plei=TRUE.
 
