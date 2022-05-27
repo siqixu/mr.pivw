@@ -49,7 +49,7 @@ $CI (Normal)
 [1,] -0.01082175    1.131381        # The 95% confidence interval of the causal effect based on the normal approximation.
 
 $pval (Bootstrap Fieller)   
-[1] 0.059                           # The P value for testing whether the causal effect is zero, which is based on the bootstrapping Fieller method..
+[1] 0.059                           # The P value for testing whether the causal effect is zero, which is based on the bootstrapping Fieller method.
 
 $CI (Bootstrap Fieller)          
      lower bound upper bound       
