@@ -1,6 +1,6 @@
-# pIVW: A novel Mendelian randomization method accounting for weak instruments and horizontal pleiotropy
+# A penalized inverse-variance weighted (pIVW) estimator for Mendelian randomization accounting for weak instruments and balanced horizontal pleiotropy
 
-The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and horizontal pleiotropy simultaneously.
+The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously.
 
 ## Setup
 Use the following command in R to install the package:
@@ -8,6 +8,11 @@ Use the following command in R to install the package:
 library(devtools)
 install_github("siqixu/mr.pivw",ref="main") # install the "mr.pivw" package
 ```
+Or install the "mr.pivw" package from R CRAN:
+```
+install.packages("mr.pivw")
+```
+
 ## Usage
 ```
 mr.pivw(data,lambda=1,plei=TRUE,sel.pval=NULL,delta=0,Boot.Fieller=TRUE,sig=0.05)
@@ -60,5 +65,5 @@ $tau2
 ```
 
 ## Reference
-Xu S, Wang P, Fung W.K. and Liu Z. A Novel Penalized Inverse-Variance Weighted Estimator for Mendelian Randomization with Applications to COVID-19 Outcomes. 2021
+Xu S., Wang P., Fung W.K. and Liu Z. (2022). A Novel Penalized Inverse-Variance Weighted Estimator for Mendelian Randomization with Applications to COVID-19 Outcomes. Biometrics. <doi:10.1111/biom.13732>
 
