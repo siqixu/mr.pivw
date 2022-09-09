@@ -17,22 +17,22 @@ install.packages("mr.pivw")
 ```
 mr.pivw(data,lambda=1,plei=TRUE,sel.pval=NULL,delta=0,Boot.Fieller=TRUE,sig=0.05)
 ```
-data: A matrix or data frame consists of four columns: the 1st (2nd) column contains the estimated genetic effects on the outcome (exposure); the 3rd (4th) column contains the estimated standard errors of the estimated genetic effects on the outcome (exposure).
+`data`: A matrix or data frame consists of four columns: the 1st (2nd) column contains the estimated genetic effects on the outcome (exposure); the 3rd (4th) column contains the estimated standard errors of the estimated genetic effects on the outcome (exposure).
 
-lambda: The penalty parameter in the pIVW estimator. The penalty parameter plays a role in the bias-variance trade-off of the estimator. We recommend to choose lambda to be 1 to achieve the smallest bias and valid inference. By default, lambda=1.
+`lambda`: The penalty parameter in the pIVW estimator. The penalty parameter plays a role in the bias-variance trade-off of the estimator. We recommend to choose lambda to be 1 to achieve the smallest bias and valid inference. By default, lambda=1.
 
-plei: If plei=TRUE, then the horizontal pleiotropy will be taken into account in the pIVW estimator. By default, plei=TRUE.
+`plei`: If plei=TRUE, then the horizontal pleiotropy will be taken into account in the pIVW estimator. By default, plei=TRUE.
 
-sel.pval:	
+`sel.pval`:	
 A vector containing the P values of the IV-exposure associations, which will be used for the IV selection. "sel.pval" should be provided when "delta" is not zero.
 
-delta:	
+`delta`:	
 The z-score threshold for IV selection. By default, delta=0 (i.e., no IV selection will be conducted).
 
-Boot.Fieller:
+`Boot.Fieller`:
 If Boot.Fieller=TRUE, then the P value and the confidence interval of the causal effect based on the bootstrapping Fieller method will be calculated. By default, Boot.Fieller=TRUE.
 
-sig:
+`sig`:
 The 100(1-sig)% confidence interval of the causal effect is calculated. By default, sig=0.05.
 
 ## Example 
