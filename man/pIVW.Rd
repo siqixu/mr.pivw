@@ -24,7 +24,7 @@
   \item{CI (Normal)}{The confidence interval of the causal effect derived from the normal distribution.}
   \item{pval (Bootstrap Fieller)}{The P value for testing whether the causal effect is zero, which is derived from the bootstrapping Fieller method.}
   \item{CI (Bootstrap Fieller)}{The confidence interval of the causal effect derived from the bootstrapping Fieller method.}
-  \item{tau2}{The variance of the horizontal pleiotropy. tau2 is calculated by using all IVs in the data before conducting the IV selection.}
+  \item{tau2}{The variance of the horizontal pleiotropy. \code{tau2} is calculated by using all IVs in the data before conducting the IV selection.}
   \item{eta}{The estimated effective sample size. It is recommended to be greater than 5 for pIVW to achieve reliable asymptotic properties.}
 }
 
