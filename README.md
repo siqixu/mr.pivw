@@ -66,10 +66,10 @@ Bootstrapping Fieller: TRUE
 Penalty parameter (lambda): 1 
 IV selection threshold (delta): 0 
 Number of variants : 1000 
-------------------------------------------------------------------
- Method Estimate Std Error  95% CI       p-value Condition
-   pIVW    0.560     0.291 -0.025, 1.272   0.059    10.071
-------------------------------------------------------------------
+
+Method Estimate Std Error  95% CI       p-value Condition
+  pIVW    0.560     0.291 -0.025, 1.272   0.059    10.071
+
 
 ## Reference
 Xu S., Wang P., Fung W.K. and Liu Z. (2022). A Novel Penalized Inverse-Variance Weighted Estimator for Mendelian Randomization with Applications to COVID-19 Outcomes. Biometrics. <doi:10.1111/biom.13732>
