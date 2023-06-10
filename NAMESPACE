@@ -1,0 +1,4 @@
+exportPattern("^[[:alpha:]]+")
+importFrom("methods", "new", "slot")
+importFrom("stats", "pnorm", "qnorm","rnorm")
+export(mr_pivw)
