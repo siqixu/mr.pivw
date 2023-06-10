@@ -57,7 +57,7 @@ The significance level used to calculate the confidence intervals. The default v
 ```
 library(mr.pivw)  # load the mr.pivw package
 mr_pivw(Bx = Bx_exp, Bxse = Bxse_exp, By = By_exp, Byse = Byse_exp)  # analyze the example data with the pIVW method. 
-```
+
 # results 
 Penalized inverse-variance weighted method
 
@@ -67,8 +67,12 @@ Penalty parameter (lambda): 1
 IV selection threshold (delta): 0 
 Number of variants : 1000 
 
+-----------------------------------------------------------
 Method Estimate Std Error  95% CI       p-value Condition
   pIVW    0.560     0.291 -0.025, 1.272   0.059    10.071
+-----------------------------------------------------------  
+```
+
 
 
 ## Reference
