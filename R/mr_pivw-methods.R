@@ -139,6 +139,10 @@ mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, 
     alpha = 0.05
     cat("\'alpha\' provided is less than or equal to zero. \'alpha\ is set to be 0.05.","\n")
   }
+  if(alpha>=1){
+    alpha = 0.05
+    cat("\'alpha\' provided is greater than or equal to one. \'alpha\ is set to be 0.05.","\n")
+  }
 
   if(delta>0){
     if(is.null(sel.pval)){
