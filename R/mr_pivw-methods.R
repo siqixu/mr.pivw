@@ -57,7 +57,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n.boot=1000,seed_boot=1){
 
 #' Penalized Inverse-Variance Weighted (pIVW) Method for Mendelian Randomization
 #'
-#' @description The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously.
+#' @description The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously.otherwise.
 #'
 #' @param Bx A numeric vector of beta-coefficient values for genetic associations with the exposure variable.
 #' @param Bxse The standard errors associated with the beta-coefficients \code{Bx}.
@@ -67,7 +67,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n.boot=1000,seed_boot=1){
 #' @param over.dispersion Should the method consider overdispersion (balanced horizontal pleiotropy)? Default is TRUE.
 #' @param delta The z-score threshold for IV selection. \code{delta} should be greater than or equal to zero. By default, \code{delta=0} (i.e., no IV selection will be conducted).  See 'Details'.
 #' @param sel.pval A numeric vector containing the P-values of the SNP effects on the exposure, which will be used for the IV selection. \code{sel.pval} should be provided when \code{delta} is not zero. See 'Details'.
-#' @param Boot.Fieller If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when \code{Condition} is smaller than 10 (see 'Details'). By default, \code{Boot.Fieller=TRUE}.
+#' @param Boot.Fieller If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. By default, \code{Boot.Fieller=TRUE} when \code{Condition} is smaller than 10 (see 'Details'), otherwise \code{Boot.Fieller=FALSE}. 
 #' @param n.boot The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when \code{Boot.Fieller=TRUE}. By default, \code{n.boot=1000}. A larger value of \code{n.boot} should be provided when a more precise P-value is needed.
 #' @param alpha The significance level used to calculate the confidence intervals. The default value is 0.05.
 #'
@@ -112,7 +112,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n.boot=1000,seed_boot=1){
 #'
 #' @export
 
-mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, sel.pval=NULL, Boot.Fieller=TRUE, n.boot=1000, alpha=0.05)
+mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, sel.pval=NULL, Boot.Fieller=NULL, n.boot=1000, alpha=0.05)
 {
 
   if(!all(length(Bx) == length(By),
@@ -124,7 +124,7 @@ mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, 
 
   object = data.frame(Bx, By, Bxse, Byse)
   Bx = object$Bx
-  Bxse  =object$Bxse
+  Bxse  = object$Bxse
   p = length(Bx)
 
   if(lambda<0){
@@ -226,6 +226,9 @@ mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, 
   se_pIVW = 1/abs(mu2p)*sqrt(sum((Bx^2/Byse^2)*(1+tau2*Byse^(-2))
                                  + beta_pIVW^2*(Bxse^2/Byse^4)*(Bx^2+Bxse^2)))
 
+  if(is.null(Boot.Fieller)){
+    Boot.Fieller = ifelse(eta<10, TRUE, FALSE) 
+  }
 
   if(Boot.Fieller==TRUE){
 
