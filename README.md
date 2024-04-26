@@ -3,19 +3,15 @@
 The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously.
 
 ## Setup
-Use the following command in R to install the package (This is the latest version v0.1.3 updated on April 26, 2024):
+Use the following command in R to install the package (The latest version v0.1.3 updated on April 26, 2024):
 ```
 library(devtools)
 install_github("siqixu/mr.pivw",ref="main") 
 ```
-Or install the "mr.pivw" package from R CRAN:
-```
-install.packages("mr.pivw")
-```
 
 ## Usage
 ```
-mr_pivw(Bx, Bxse, By, Byse, lambda = 1, over.dispersion = TRUE, delta = 0, sel.pval = NULL, Boot.Fieller = TRUE, alpha = 0.05)
+mr_pivw(Bx, Bxse, By, Byse, lambda = 1, over.dispersion = TRUE, delta = 0, sel.pval = NULL, Boot.Fieller = NULL, n.boot = 1000, alpha = 0.05)
 ```
 `Bx`: A numeric vector of beta-coefficient values for genetic associations with the exposure variable.
 
@@ -34,12 +30,26 @@ mr_pivw(Bx, Bxse, By, Byse, lambda = 1, over.dispersion = TRUE, delta = 0, sel.p
 `sel.pval`: A numeric vector containing the P-values of the SNP effects on the exposure, which will be used for the IV selection. `sel.pval` should be provided when `delta` is not zero. 
 
 `Boot.Fieller`: 	
-If `Boot.Fieller=TRUE`, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when `Condition` is smaller than 10. By default, `Boot.Fieller=TRUE`.
+If `Boot.Fieller=TRUE`, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. By default, `Boot.Fieller=TRUE` when `Condition` is smaller than 10 (see 'Details'), and `Boot.Fieller=FALSE` otherwise.
+
+`n.boot`
+The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when `Boot.Fieller=TRUE`. By default, `n.boot=1000`. A larger value of n.boot should be provided when a more precise P-value is needed.
 
 `alpha`: 	
 The significance level used to calculate the confidence intervals. The default value is 0.05.
 
 ## Value
+
+`Over.dispersion`: `TRUE` if the method has considered balanced horizontal pleiotropy, `FALSE` otherwise.
+
+`Boot.Fieller`: `TRUE` if the bootstrapping Fieller method is used to calculate the P-value and the confidence interval of the causal effect, `FALSE` otherwise.
+
+`N.boot`:	The number of bootstrap samples used in the bootstrapping Fieller method.
+
+`Lambda`: The penalty parameter in the pIVW estimator.
+
+`Delta`: The z-score threshold for IV selection.
+
 `Estimate`: The causal point estimate from the pIVW estimator.	
 
 `StdError`: The standard error associated with `Estimate`.	
@@ -49,6 +59,10 @@ The significance level used to calculate the confidence intervals. The default v
 `CIUpper`: The upper bound of the confidence interval for `Estimate`. 	
 
 `Pvalue`: P-value associated with `Estimate`.	
+
+`Tau2`:	The variance of the balanced horizontal pleiotropy. `Tau2` is calculated by using all IVs in the data before conducting the IV selection.
+
+`SNPs`: The number of SNPs after IV selection.
 
 `Condition`: The estimated effective sample size. It is recommended to be greater than 5 for the pIVW estimator to achieve reliable asymptotic properties.	
 
@@ -61,15 +75,15 @@ mr_pivw(Bx = Bx_exp, Bxse = Bxse_exp, By = By_exp, Byse = Byse_exp)  # analyze t
 # results 
 Penalized inverse-variance weighted method
 
-Over dispersion: TRUE 
-Bootstrapping Fieller: TRUE 
+Account for over-dispersion: TRUE 
+CI and P-value: Normal approximation 
 Penalty parameter (lambda): 1 
 IV selection threshold (delta): 0 
-Number of variants : 1000 
+Number of variants: 1000 
 
 -----------------------------------------------------------
 Method Estimate Std Error  95% CI       p-value Condition
-  pIVW    0.560     0.291 -0.025, 1.272   0.059    10.071
+  pIVW    0.560     0.291 -0.011, 1.131  0.0545    10.071
 -----------------------------------------------------------  
 ```
 
