@@ -4,6 +4,7 @@
 #'
 #' @slot Over.dispersion Should the method consider overdispersion (balanced horizontal pleiotropy)? Default is TRUE.
 #' @slot Boot.Fieller If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when \code{Condition} (the estimated effective sample size) is smaller than 10. By default, \code{Boot.Fieller=TRUE}.
+#' @slot N.boot The number of bootstrap samples used in the bootstrapping Fieller method.
 #' @slot Lambda The penalty parameter in the pIVW estimator. The penalty parameter plays a role in the bias-variance trade-off of the estimator. It is recommended to choose \code{lambda=1} to achieve the smallest bias and valid inference. By default, \code{lambda=1}.
 #' @slot Delta The z-score threshold for IV selection. By default, \code{delta=0} (i.e., no IV selection will be conducted).
 #' @slot Estimate The causal point estimate from the pIVW estimator.
@@ -22,6 +23,7 @@
 setClass("PIVW",
          representation(Over.dispersion = "logical",
                         Boot.Fieller = "logical",
+                        N.boot = 'numeric',
                         Lambda = "numeric",
                         Delta = "numeric",
 
