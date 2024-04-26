@@ -19,10 +19,10 @@ setMethod("show",
             colnames(output.table) <- Statistic
 
             cat("\nPenalized inverse-variance weighted method\n\n")
-            cat("Accout for over dispersion:", object@Over.dispersion, "\n")
+            cat("Account for over-dispersion:", object@Over.dispersion, "\n")
             if(object@Boot.Fieller){
               cat("CI and P-value:", "Bootstrapping Fieller", "\n")
-              cat("No. of bootstrap samples:", object@N.boot, "\n")
+              cat("Number of bootstrap samples:", object@N.boot, "\n")
             }else{
               cat("CI and P-value:", "Normal approximation", "\n")
             }
