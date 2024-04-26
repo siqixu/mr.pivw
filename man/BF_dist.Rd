@@ -20,7 +20,7 @@ BF_dist(
 
 \item{lambda}{The penalty parameter in the pIVW estimator. By default, \code{lambda=1}.}
 
-\item{n_boot}{The sample size of the bootstrap samples. By default, \code{n_boot=1000}.}
+\item{n_boot}{The number of the bootstrap samples. By default, \code{n_boot=1000}.}
 
 \item{seed_boot}{The seed for random sampling in the bootstrap method. By default, \code{seed_boot=1}.}
 }

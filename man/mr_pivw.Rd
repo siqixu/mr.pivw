@@ -12,6 +12,7 @@ mr_pivw(
   delta = 0,
   sel.pval = NULL,
   Boot.Fieller = TRUE,
+  n.boot = 1000,
   alpha = 0.05
 )
 }
@@ -34,6 +35,8 @@ mr_pivw(
 
 \item{Boot.Fieller}{If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when \code{Condition} is smaller than 10 (see 'Details'). By default, \code{Boot.Fieller=TRUE}.}
 
+\item{n.boot}{The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when \code{Boot.Fieller=TRUE}. By default, \code{n.boot=1000}. A larger value of \code{n.boot} should be provided when a more precise P-value is needed.}
+
 \item{alpha}{The significance level used to calculate the confidence intervals. The default value is 0.05.}
 }
 \value{
@@ -41,7 +44,8 @@ The output from the function is a \code{PIVW} object containing:
 
  \item{Over.dispersion}{\code{TRUE} if the method has considered balanced horizontal pleiotropy, \code{FALSE} otherwise.}
  \item{Boot.Fieller}{\code{TRUE} if the bootstrapping Fieller method is used to calculate the P-value and the confidence interval of the causal effect, \code{FALSE} otherwise.}
- \item{Lambda}{The penalty parameter in the pIVW estimator.}
+ \item{N.boot}{The number of bootstrap samples used in the bootstrapping Fieller method.}
+\item{Lambda}{The penalty parameter in the pIVW estimator.}
  \item{Delta}{The z-score threshold for IV selection.}
  \item{Estimate}{The causal point estimate from the pIVW estimator.}
  \item{StdError}{The standard error associated with \code{Estimate}.}
