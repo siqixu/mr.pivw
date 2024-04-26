@@ -7,7 +7,7 @@
 #' @param beta_hat The causal effect estimate.
 #' @param tau2 The estimated variance of the horizontal pleiotropy.
 #' @param lambda The penalty parameter in the pIVW estimator. By default, \code{lambda=1}.
-#' @param n_boot The sample size of the bootstrap samples. By default, \code{n_boot=1000}.
+#' @param n.boot The number of bootstrap samples. By default, \code{n.boot=1000}.
 #' @param seed_boot The seed for random sampling in the bootstrap method. By default, \code{seed_boot=1}.
 #'
 #' @keywords internal
@@ -16,12 +16,12 @@
 #'
 #' @export
 
-BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n_boot=1000,seed_boot=1){
+BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n.boot=1000,seed_boot=1){
   i = 0
   set.seed(seed_boot)
   z_b = numeric()
 
-  while(i < n_boot){
+  while(i < n.boot){
     Bx = object$Bx
     Byse  = object$Byse
     Bxse  = object$Bxse
@@ -68,6 +68,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n_boot=1000,seed_boot=1){
 #' @param delta The z-score threshold for IV selection. \code{delta} should be greater than or equal to zero. By default, \code{delta=0} (i.e., no IV selection will be conducted).  See 'Details'.
 #' @param sel.pval A numeric vector containing the P-values of the SNP effects on the exposure, which will be used for the IV selection. \code{sel.pval} should be provided when \code{delta} is not zero. See 'Details'.
 #' @param Boot.Fieller If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when \code{Condition} is smaller than 10 (see 'Details'). By default, \code{Boot.Fieller=TRUE}.
+#' @param n.boot The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when \code{Boot.Fieller=TRUE}. By default, \code{n.boot=1000}. A larger value of \code{n.boot} should be provided when a more precise P-value is needed.
 #' @param alpha The significance level used to calculate the confidence intervals. The default value is 0.05.
 #'
 #' @details The penalized inverse-variance weighted (pIVW) estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously
@@ -92,6 +93,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n_boot=1000,seed_boot=1){
 #'
 #'  \item{Over.dispersion}{\code{TRUE} if the method has considered balanced horizontal pleiotropy, \code{FALSE} otherwise.}
 #'  \item{Boot.Fieller}{\code{TRUE} if the bootstrapping Fieller method is used to calculate the P-value and the confidence interval of the causal effect, \code{FALSE} otherwise.}
+#'  \item{N.boot}{The number of bootstrap samples used in the bootstrapping Fieller method.}
 #'  \item{Lambda}{The penalty parameter in the pIVW estimator.}
 #'  \item{Delta}{The z-score threshold for IV selection.}
 #'  \item{Estimate}{The causal point estimate from the pIVW estimator.}
@@ -110,7 +112,7 @@ BF_dist = function(object,beta_hat=0,tau2=0,lambda=1,n_boot=1000,seed_boot=1){
 #'
 #' @export
 
-mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, sel.pval=NULL, Boot.Fieller=TRUE, alpha=0.05)
+mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, sel.pval=NULL, Boot.Fieller=TRUE, n.boot=1000, alpha=0.05)
 {
 
   if(!all(length(Bx) == length(By),
@@ -227,7 +229,7 @@ mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, 
 
   if(Boot.Fieller==TRUE){
 
-    z_b = BF_dist(object,beta_pIVW,tau2,lambda)
+    z_b = BF_dist(object,beta_pIVW,tau2,lambda,n.boot)
     v1p = sum(Byse^(-4)*(By^2*Bx^2-(By^2-Byse^2-tau2)*(Bx^2-Bxse^2)))
     w = mu2p/(2*mu2p-mu2)
     v2p = w^2*v2
@@ -272,6 +274,7 @@ mr_pivw = function(Bx, Bxse, By, Byse, lambda=1, over.dispersion=TRUE, delta=0, 
   return(new("PIVW",
              Over.dispersion = over.dispersion,
              Boot.Fieller = Boot.Fieller,
+             N.boot = n.boot,
              Lambda = lambda,
              Delta = delta,
 
