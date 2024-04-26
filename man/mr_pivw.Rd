@@ -11,7 +11,7 @@ mr_pivw(
   over.dispersion = TRUE,
   delta = 0,
   sel.pval = NULL,
-  Boot.Fieller = TRUE,
+  Boot.Fieller = NULL,
   n.boot = 1000,
   alpha = 0.05
 )
@@ -33,7 +33,7 @@ mr_pivw(
 
 \item{sel.pval}{A numeric vector containing the P-values of the SNP effects on the exposure, which will be used for the IV selection. \code{sel.pval} should be provided when \code{delta} is not zero. See 'Details'.}
 
-\item{Boot.Fieller}{If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. It is recommended to use the bootstrapping Fieller method when \code{Condition} is smaller than 10 (see 'Details'). By default, \code{Boot.Fieller=TRUE}.}
+\item{Boot.Fieller}{If \code{Boot.Fieller=TRUE}, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. By default, \code{Boot.Fieller=TRUE} when \code{Condition} is smaller than 10 (see 'Details'), otherwise \code{Boot.Fieller=FALSE}.}
 
 \item{n.boot}{The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when \code{Boot.Fieller=TRUE}. By default, \code{n.boot=1000}. A larger value of \code{n.boot} should be provided when a more precise P-value is needed.}
 
