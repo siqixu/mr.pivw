@@ -3,7 +3,7 @@
 The penalized inverse-variance weighted (pIVW) estimator is a Mendelian randomization method for estimating the causal effect of an exposure variable on an outcome of interest based on summary-level GWAS data. The pIVW estimator accounts for weak instruments and balanced horizontal pleiotropy simultaneously.
 
 ## Setup
-Use the following command in R to install the package (which is the latest version):
+Use the following command in R to install the package (This is the latest version v0.1.3 updated on April 26, 2024):
 ```
 library(devtools)
 install_github("siqixu/mr.pivw",ref="main") 
