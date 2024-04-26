@@ -28,7 +28,7 @@ setMethod("show",
             }
             cat("Penalty parameter (lambda):", object@Lambda, "\n")
             cat("IV selection threshold (delta):", round(object@Delta,3), "\n")
-            cat("Number of variants :", object@SNPs, "\n")
+            cat("Number of variants:", object@SNPs, "\n")
 
 
             cat("------------------------------------------------------------------\n")
