@@ -30,9 +30,9 @@ mr_pivw(Bx, Bxse, By, Byse, lambda = 1, over.dispersion = TRUE, delta = 0, sel.p
 `sel.pval`: A numeric vector containing the P-values of the SNP effects on the exposure, which will be used for the IV selection. `sel.pval` should be provided when `delta` is not zero. 
 
 `Boot.Fieller`: 	
-If `Boot.Fieller=TRUE`, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. By default, `Boot.Fieller=TRUE` when `Condition` is smaller than 10 (see 'Details'), and `Boot.Fieller=FALSE` otherwise.
+If `Boot.Fieller=TRUE`, then the P-value and the confidence interval of the causal effect will be calculated based on the bootstrapping Fieller method. Otherwise, the P-value and the confidence interval of the causal effect will be calculated from the normal distribution. By default, `Boot.Fieller=TRUE` when `Condition` is smaller than 10 (see 'Details' in R Help Documentation), and `Boot.Fieller=FALSE` otherwise.
 
-`n.boot`
+`n.boot`:
 The number of bootstrap samples used in the bootstrapping Fieller method. It will be used only when `Boot.Fieller=TRUE`. By default, `n.boot=1000`. A larger value of n.boot should be provided when a more precise P-value is needed.
 
 `alpha`: 	
