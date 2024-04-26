@@ -53,7 +53,7 @@ The output from the function is a \code{PIVW} object containing:
  \item{CIUpper}{The upper bound of the confidence interval for \code{Estimate}, which is derived from the bootstrapping Fieller method or normal distribution. For the bootstrapping Fieller's interval, if it contains multiple ranges, then upper limits of all ranges will be reported.}
  \item{Alpha}{The significance level used in constructing the confidence interval.}
  \item{Pvalue}{P-value associated with \code{Estimate}, which is derived from the bootstrapping Fieller method or normal distribution.}
- \item{Tau2}{The variance of the balanced horizontal pleiotropy. \code{Tau2} is calculated By using all IVs in the data before conducting the IV selection.}
+ \item{Tau2}{The variance of the balanced horizontal pleiotropy. \code{Tau2} is calculated by using all IVs in the data before conducting the IV selection.}
  \item{SNPs}{The number of SNPs after IV selection.}
  \item{Condition}{The estimated effective sample size. It is recommended to be greater than 5 for the pIVW estimator to achieve reliable asymptotic properties. See 'Details'.}
 }
